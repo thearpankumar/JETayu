@@ -1,17 +1,17 @@
 from machine import Pin, time_pulse_us
 from time import sleep_us, sleep
 
-ECHO_PIN1 = 9
-TRIGGER_PIN1 = 8
+ECHO_PIN1 = 3
+TRIGGER_PIN1 = 2
 
-ECHO_PIN2 = 11
-TRIGGER_PIN2 = 12
+ECHO_PIN2 = 18
+TRIGGER_PIN2 = 19
 
-ECHO_PIN3 = 7
-TRIGGER_PIN3 = 6
+ECHO_PIN3 = 12
+TRIGGER_PIN3 = 11
 
-ECHO_PIN4 = 5
-TRIGGER_PIN4 = 4
+ECHO_PIN4 = 15
+TRIGGER_PIN4 = 14
 
 trigger1 = Pin(TRIGGER_PIN1, Pin.OUT)
 echo1 = Pin(ECHO_PIN1, Pin.IN)
