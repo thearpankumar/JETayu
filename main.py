@@ -156,7 +156,7 @@ while True:
         if led_off > -1:
             print('LED OFF')
             led.value(0)
-            
+            2
         response = get_html('index.html')
         cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
         cl.send(response)
