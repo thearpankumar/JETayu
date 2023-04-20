@@ -1,18 +1,13 @@
 import serial
-"""import serial
-import struct
+import time
 
-ser = serial.Serial('/dev/ttyUSB0', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS)
-
+ser = serial.Serial('/dev/ttyUSB1', 9600) # HC-12 serial port
 while True:
-    line = ser.readline()
-
-    #ser.write(b"?\n")
-
-    data = int.from_bytes(line[:-2], byteorder='big', signed=False)
-
-# print data
-    print(data)"""
+    #message = input("Enter message to send: ")
+    message = 'i'
+    ser.write(message.encode())
+    time.sleep(1)
+    print(message)
 
 """
 Sabertooth_Serial_motorA = serial.Serial(
@@ -24,8 +19,3 @@ Sabertooth_Serial_motorA = serial.Serial(
 
 Sabertooth_Serial_motorA.read(struct.pack(">B", int(self.data.replace("left"))))
 """
-
-ser = serial.Serial('/dev/ttyUSB0', 9600)  # HC-12 serial port
-while True:
-    message = ser.readline().decode().strip()
-    print("Received message: ", message)
