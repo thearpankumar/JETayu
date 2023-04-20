@@ -65,7 +65,7 @@ float pid_i_mem_roll, pid_roll_setpoint, gyro_roll_input, pid_output_roll, pid_l
 float pid_i_mem_pitch, pid_pitch_setpoint, gyro_pitch_input, pid_output_pitch, pid_last_pitch_d_error;
 float pid_i_mem_yaw, pid_yaw_setpoint, gyro_yaw_input, pid_output_yaw, pid_last_yaw_d_error;
 float angle_roll_acc, angle_pitch_acc, angle_pitch, angle_roll;
-boolean gyro_angles_set;
+bool gyro_angles_set;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Setup routine
@@ -86,7 +86,7 @@ void setup(){
   DDRB |= B00110000;                                                        //Configure digital poort 12 and 13 as output.
 
   //Use the led on the Arduino for startup indication.
-  digitalWrite(12,HIGH);                                                    //Turn on the warning led.
+  //digitalWrite(12,HIGH);                                                    //Turn on the warning led.
 
   //Check the EEPROM signature to make sure that the setup program is executed.
   while(eeprom_data[33] != 'J' || eeprom_data[34] != 'M' || eeprom_data[35] != 'B')delay(10);
@@ -151,12 +151,12 @@ void setup(){
   //12.6V equals 1023 analogRead(0).
   //1260 / 1023 = 1.2317.
   //The variable battery_voltage holds 1050 if the battery voltage is 10.5V.
-  battery_voltage = (analogRead(0) + 65) * 1.2317;
+  //battery_voltage = (analogRead(0) + 65) * 1.2317;
 
   loop_timer = micros();                                                    //Set the timer for the next loop.
 
   //When everything is done, turn off the led.
-  digitalWrite(12,LOW);                                                     //Turn off the warning led.
+  //digitalWrite(12,LOW);                                                     //Turn off the warning led.
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Main program loop
@@ -266,10 +266,10 @@ void loop(){
   //The battery voltage is needed for compensation.
   //A complementary filter is used to reduce noise.
   //0.09853 = 0.08 * 1.2317.
-  battery_voltage = battery_voltage * 0.92 + (analogRead(0) + 65) * 0.09853;
+  //battery_voltage = battery_voltage * 0.92 + (analogRead(0) + 65) * 0.09853;
 
   //Turn on the led if battery voltage is to low.
-  if(battery_voltage < 1000 && battery_voltage > 600)digitalWrite(12, HIGH);
+  //if(battery_voltage < 1000 && battery_voltage > 600)digitalWrite(12, HIGH);
 
 
   throttle = receiver_input_channel_3;                                      //We need the throttle signal as a base signal.
@@ -281,12 +281,12 @@ void loop(){
     esc_3 = throttle + pid_output_pitch - pid_output_roll - pid_output_yaw; //Calculate the pulse for esc 3 (rear-left - CCW)
     esc_4 = throttle - pid_output_pitch - pid_output_roll + pid_output_yaw; //Calculate the pulse for esc 4 (front-left - CW)
 
-    if (battery_voltage < 1240 && battery_voltage > 800){                   //Is the battery connected?
-      esc_1 += esc_1 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-1 pulse for voltage drop.
-      esc_2 += esc_2 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-2 pulse for voltage drop.
-      esc_3 += esc_3 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-3 pulse for voltage drop.
-      esc_4 += esc_4 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-4 pulse for voltage drop.
-    } 
+    //if (battery_voltage < 1240 && battery_voltage > 800){                   //Is the battery connected?
+      //esc_1 += esc_1 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-1 pulse for voltage drop.
+      //esc_2 += esc_2 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-2 pulse for voltage drop.
+      //esc_3 += esc_3 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-3 pulse for voltage drop.
+      //esc_4 += esc_4 * ((1240 - battery_voltage)/(float)3500);              //Compensate the esc-4 pulse for voltage drop.
+    //} 
 
     if (esc_1 < 1100) esc_1 = 1100;                                         //Keep the motors running.
     if (esc_2 < 1100) esc_2 = 1100;                                         //Keep the motors running.

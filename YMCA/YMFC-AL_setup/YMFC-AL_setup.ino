@@ -371,7 +371,7 @@ void loop(){
     Serial.println(F("LED test"));
     Serial.println(F("==================================================="));
     digitalWrite(12, HIGH);
-    Serial.println(F("The LED should now be lit"));
+    Serial.println(F("The LED s45hould now be lit"));
     Serial.println(F("Move stick 'nose up' and back to center to continue"));
     check_to_continue();
     digitalWrite(12, LOW);

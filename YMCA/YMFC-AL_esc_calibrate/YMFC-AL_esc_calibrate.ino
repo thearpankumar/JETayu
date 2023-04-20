@@ -37,7 +37,7 @@
 //Declaring global variables
 byte last_channel_1, last_channel_2, last_channel_3, last_channel_4;
 byte eeprom_data[36], start, data;
-boolean new_function_request,first_angle;
+bool new_function_request,first_angle;
 volatile int receiver_input_channel_1, receiver_input_channel_2, receiver_input_channel_3, receiver_input_channel_4;
 int esc_1, esc_2, esc_3, esc_4;
 int counter_channel_1, counter_channel_2, counter_channel_3, counter_channel_4;
