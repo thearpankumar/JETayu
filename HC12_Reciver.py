@@ -27,5 +27,5 @@ Sabertooth_Serial_motorA.read(struct.pack(">B", int(self.data.replace("left"))))
 
 ser = serial.Serial('/dev/ttyUSB0', 9600)  # HC-12 serial port
 while True:
-    message = ser.readline().decode()
+    message = ser.readline().decode().strip()
     print("Received message: ", message)
