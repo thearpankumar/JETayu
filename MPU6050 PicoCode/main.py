@@ -5,8 +5,8 @@ from imu import MPU6050
 from time import sleep
 from machine import Pin, I2C
 
-LED = machine.Pin(1, machine.Pin.OUT)
-LED.on()
+"""LED = machine.Pin(1, machine.Pin.OUT)
+LED.on()"""
 
 i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=400000)
 imu = MPU6050(i2c)

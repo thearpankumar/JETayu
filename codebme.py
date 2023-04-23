@@ -1,4 +1,4 @@
-"""from machine import Pin, I2C
+from machine import Pin, I2C
 from time import sleep
 import BME280
 # PICO - Pins
@@ -18,6 +18,5 @@ while True:
     tempf = str(round(tempf, 2)) + 'F'
     print('Temperature:', temp ,tempf, '  Pressure: ',pres)
     #print('Humidity: ', hum)
-    sleep(2)"""
-
+    sleep(2)
 
