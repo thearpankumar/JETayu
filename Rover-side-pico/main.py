@@ -6,9 +6,11 @@ from imu import MPU6050
 #from machine import Pin, I2C
 import BME280
 
-sda=machine.Pin(16)
-scl=machine.Pin(17)
-i2c=machine.I2C(0,sda=sda, scl=scl, freq=400000)
+
+total_data = []
+sda = machine.Pin(16)
+scl = machine.Pin(17)
+i2c = machine.I2C(0,sda=sda, scl=scl, freq=400000)
 
 ECHO_FRONT = 3
 TRIGGER_FRONT = 2
@@ -45,6 +47,7 @@ imu = MPU6050(MPU_PICO)
 
 # Define the ADC pin connected to the AOUT pin of the MQ135 sensor
 adc = ADC(0)
+adc_soilmoisture = machine.ADC(26)
 
 # Calibration values for the MQ135 sensor
 CALIBRATION_RL_VALUE = 10.0  # Resistance of the load resistor (RL) in Kohms
@@ -101,13 +104,13 @@ def measure_distance():
 while True:
     # for pico reciving
     if uart.any():
-        data = uart.read(1)
+        data_recived = uart.read(1)
         if data is not None:
-            received_byte = int.from_bytes(data, 'big')
+            received_byte = int.from_bytes(data_recived, 'big')
             print("Received byte: {}".format(received_byte))
 
     # for pico sending    
-    data = 30  # Data to send
+    data = total_data  # Data to send
     data = bytes(" ", 'utf-8')
     uart.write(data)  # Send data over UART
     utime.sleep(1)  # Delay for 1 second
@@ -151,3 +154,13 @@ while True:
     gas_concentration = read_gas_concentration()
     print("Gas Concentration: {:.2f} ppm".format(gas_concentration))
     utime.sleep(1)
+    
+    
+    # Soil Moisture
+    moisture_value = adc.read_u16()
+    moisture_percentage = int((moisture_value / 65535) * 100)
+    print("Moisture: {}%".format(moisture_percentage))
+    utime.sleep(1)
+    
+    #generating list
+    total_data = [distance_need[0],distance_need[1],distance_need[2],distance_need[3], ax, ay, az, gx, gy, gz, tem, temp, tempf, pres, gas_concentration, moisture_percentage]

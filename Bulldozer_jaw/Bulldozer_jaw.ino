@@ -20,8 +20,9 @@ void loop() {
     {
       
       myservo.write(DELAY);
-      //Serial.print("\n");
-      //Serial.println("Motor speed:"); Serial.print("  "); Serial.print(SPEED); Serial.print("%"); 
+      Serial.print("Turned to ");                   
+      Serial.println(DELAY);
+      Serial.flush();
     }     
   }
 }
